@@ -1,4 +1,5 @@
 var board = document.getElementById("board");
+var board2 = document.getElementById("board2");
 
 for (y = 0; y < 10; y++) {
   for (x = 0; x < 10; x++) {
@@ -16,7 +17,35 @@ for (y = 0; y < 10; y++) {
   }
 }
 
+for (i = 0; i < 10; i++) {
+  for (j = 0; j < 10; j++) {
+
+    var box2 = document.createElement("div");
+    box2.style.background = 'blue';
+    board2.appendChild(box2);
+    box2.id = j.toString() + i.toString();      
+
+    var width = j * 50;
+    var height = i * 50;      
+
+    box2.style.top = height + 'px';
+    box2.style.left = width + 'px';
+  }
+}
+
+
 var boardArray = [[0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0,0]]
+
+var board2Array = [[0,0,0,0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0,0,0,0],
@@ -53,7 +82,8 @@ function randomCarrier(board) {
   }
 }
 
-randomCarrier(boardArray); 
+randomCarrier(boardArray);
+randomCarrier(board2Array);  
 
 function randomBattleship(board) {
   c = or();
@@ -87,6 +117,7 @@ function randomBattleship(board) {
 }
 
 randomBattleship(boardArray);
+randomBattleship(board2Array);
 
 function randomDestroyer(board) {
   c = or();
@@ -118,6 +149,7 @@ function randomDestroyer(board) {
 }
 
 randomDestroyer(boardArray);
+randomDestroyer(board2Array);
 
 function randomSubmarine(board) {
   c = or();
@@ -149,6 +181,7 @@ function randomSubmarine(board) {
 }
 
 randomSubmarine(boardArray);
+randomSubmarine(board2Array);
 
 function randomBoat(board) {
   c = or();
@@ -177,8 +210,16 @@ function randomBoat(board) {
     }
 }
 randomBoat(boardArray);
+randomBoat(board2Array);
+
+console.log(boardArray);
+console.log(board2Array);
 
 board.addEventListener("click", shoot);
+board2.addEventListener("click", shoot2);
+
+var score = 0;
+var score2 = 0;
 
 function shoot(space) {
 
@@ -190,6 +231,20 @@ function shoot(space) {
   } 
 
   else if (boardArray[y][x] == 1) {
+    space.target.style.background = 'red';
+  } 
+}
+
+function shoot2(space) {
+
+  var x = space.target.id.substring(0,1);
+  var y = space.target.id.substring(1,2);
+
+  if (board2Array[y][x] == 0) {
+    space.target.style.background = 'white';
+  } 
+
+  else if (board2Array[y][x] == 1) {
     space.target.style.background = 'red';
   } 
 }
