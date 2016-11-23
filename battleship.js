@@ -212,14 +212,19 @@ function randomBoat(board) {
 randomBoat(boardArray);
 randomBoat(board2Array);
 
-console.log(boardArray);
-console.log(board2Array);
-
 board.addEventListener("click", shoot);
 board2.addEventListener("click", shoot2);
 
 var score = 0;
 var score2 = 0;
+
+function onewin() {
+  alert("Player 1 Wins"); 
+}
+
+function twowin() {
+  alert("Player 2 Wins");
+}
 
 function shoot(space) {
 
@@ -231,7 +236,12 @@ function shoot(space) {
   } 
 
   else if (boardArray[y][x] == 1) {
+    boardArray[y][x] = -1;
     space.target.style.background = 'red';
+    score++;
+    if ((score == 17)&&(score2 != 17)) {
+      setTimeout(onewin, 500);
+    }
   } 
 }
 
@@ -245,6 +255,11 @@ function shoot2(space) {
   } 
 
   else if (board2Array[y][x] == 1) {
+    board2Array[y][x] = -1;
     space.target.style.background = 'red';
+    score2++;
+    if ((score2 == 17)&&(score != 17)) {
+      setTimeout(twowin, 500);
+    }
   } 
 }
